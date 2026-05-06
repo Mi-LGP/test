@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cl.dao.TuangouActivityDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.cl.entity.TuangouActivityEntity" id="tuangouactivityMap">
+        <result property="goodsid" column="goodsid"/>
+        <result property="goodsname" column="goodsname"/>
+        <result property="picture" column="picture"/>
+        <result property="groupono" column="groupono"/>
+        <result property="groupprice" column="groupprice"/>
+        <result property="grouppeople" column="grouppeople"/>
+        <result property="curpeople" column="curpeople"/>
+        <result property="status" column="status"/>
+        <result property="leaderid" column="leaderid"/>
+        <result property="leadername" column="leadername"/>
+        <result property="endtime" column="endtime"/>
+        <result property="addtime" column="addtime"/>
+    </resultMap>
+
+    <select id="selectListView"
+		resultType="com.cl.entity.view.TuangouActivityView" >
+
+		SELECT  tuangou_activity.* FROM tuangou_activity 	        
+        <where> 1=1 ${ew.sqlSegment}</where>
+	</select>
+	
+	<select id="selectView"
+		resultType="com.cl.entity.view.TuangouActivityView" >
+		SELECT * FROM tuangou_activity  <where> 1=1 ${ew.sqlSegment}</where>
+	</select>
+
+</mapper>
