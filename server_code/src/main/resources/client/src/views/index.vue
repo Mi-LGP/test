@@ -1,7 +1,7 @@
 <template>
 	<div class="home">
 		<div class="index_top">
-			<div class="index_top_title"><span>基于SpribgBoot的团购电商系统</span></div>
+			<div class="index_top_title"><span>基于SpribgBoot的社区团购系统</span></div>
 			<div class="index_top_right">
 				<el-button v-if="!Token" class="login" type="success" icon="User" circle @click="loginClick">
 					登录

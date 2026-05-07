@@ -57,7 +57,7 @@ const config = {
     },
     getProjectName(){
         return {
-            projectName: `基于SpribgBoot的团购电商系统`
+            projectName: `基于SpribgBoot的社区团购系统`
         } 
     }
 }

@@ -6,7 +6,7 @@
 			</div>
 		</div>
 
-		<div class="projectTitle">基于SpribgBoot的团购电商系统</div>
+		<div class="projectTitle">基于SpribgBoot的社区团购系统</div>
 		<div class="top_right_view">
 			<el-dropdown class="avatar-container" trigger="hover">
 				<div class="avatar-wrapper">

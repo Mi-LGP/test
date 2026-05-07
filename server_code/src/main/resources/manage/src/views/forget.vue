@@ -2,7 +2,7 @@
 	<div>
 		<div class="forget_view">
 			<el-form :model="forgetForm" class="forget_box">
-				<div class="forget_title">基于SpribgBoot的团购电商系统{{pageType==1?'找回密码':pageType==2?'输入密保':'重置密码'}}</div>
+				<div class="forget_title">基于SpribgBoot的社区团购系统{{pageType==1?'找回密码':pageType==2?'输入密保':'重置密码'}}</div>
 				<div class="tab_view">
 					<div class="header_number" :class="pageType>1?'header_number2':pageType==1?'header_number1':''"><div class="number" v-if="pageType<2">1</div><div class="number" v-else><el-icon><Check /></el-icon></div></div>
 					<div class="header_number" :class="pageType>2?'header_number2':pageType==2?'header_number1':''"><div class="number" v-if="pageType<3">2</div><div class="number" v-else><el-icon><Check /></el-icon></div></div>
