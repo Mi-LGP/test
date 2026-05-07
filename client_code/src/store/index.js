@@ -3,16 +3,12 @@ import user from './modules/user'
 import system from './modules/system'
 
 export default createStore({
-  state: {
-  },
-  getters: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
+  state: {},
+  getters: {},
+  mutations: {},
+  actions: {},
   modules: {
-	user,
-	system
-  }
+    user,
+    system,
+  },
 })

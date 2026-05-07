@@ -1,41 +1,30 @@
 package com.cl.entity.view;
 
-import com.cl.entity.ShangpinfenleiEntity;
-
 import com.baomidou.mybatisplus.annotations.TableName;
-import org.apache.commons.beanutils.BeanUtils;
-import java.lang.reflect.InvocationTargetException;
-import java.math.BigDecimal;
-
+import com.cl.entity.ShangpinfenleiEntity;
 import java.io.Serializable;
-import com.cl.utils.EncryptUtil;
- 
+import java.lang.reflect.InvocationTargetException;
+import org.apache.commons.beanutils.BeanUtils;
 
 /**
- * 商品分类
- * 后端返回视图实体辅助类   
- * （通常后端关联的表或者自定义的字段需要返回使用）
- * @author 
- * @email 
+ * 商品分类 后端返回视图实体辅助类 （通常后端关联的表或者自定义的字段需要返回使用）
+ *
+ * @author
+ * @email
  * @date 2025-04-06 15:12:26
  */
 @TableName("shangpinfenlei")
-public class ShangpinfenleiView  extends ShangpinfenleiEntity implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class ShangpinfenleiView extends ShangpinfenleiEntity implements Serializable {
+  private static final long serialVersionUID = 1L;
 
-	public ShangpinfenleiView(){
-	}
- 
- 	public ShangpinfenleiView(ShangpinfenleiEntity shangpinfenleiEntity){
- 	try {
-			BeanUtils.copyProperties(this, shangpinfenleiEntity);
-		} catch (IllegalAccessException | InvocationTargetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
- 		
-	}
+  public ShangpinfenleiView() {}
 
-
-
+  public ShangpinfenleiView(ShangpinfenleiEntity shangpinfenleiEntity) {
+    try {
+      BeanUtils.copyProperties(this, shangpinfenleiEntity);
+    } catch (IllegalAccessException | InvocationTargetException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+  }
 }

@@ -38,150 +38,170 @@ import chatFriendAdd from '@/views/pages/chatFriend/formAdd'
 import order_confirm from '@/views/pages/shop_order/confirm'
 import ordersList from '@/views/pages/shop_order/list'
 
-const routes = [{
-		path: '/',
-		redirect: '/index/home'
-	},
-	{
-		path: '/index',
-		component: index,
-		children: [{
-			path: 'home',
-			component: home
-		}
-		, {
-			path: 'newsList',
-			component: newsList
-		}
-		, {
-			path: 'yonghuList',
-			component: yonghuList
-		}, {
-			path: 'yonghuDetail',
-			component: yonghuDetail
-		}, {
-			path: 'yonghuAdd',
-			component: yonghuAdd
-		}
-		, {
-			path: 'yonghuCenter',
-			component: yonghuCenter
-		}
-		, {
-			path: 'tuangoushangpinList',
-			component: tuangoushangpinList
-		}, {
-			path: 'tuangoushangpinDetail',
-			component: tuangoushangpinDetail
-		}, {
-			path: 'tuangoushangpinAdd',
-			component: tuangoushangpinAdd
-		}
-        , {
-            path: 'storeupList',
-            component: storeupList
-        }
-		, {
-			path: 'addressList',
-			component: addressList
-		}
-		, {
-			path: 'shangpinfenleiList',
-			component: shangpinfenleiList
-		}, {
-			path: 'shangpinfenleiDetail',
-			component: shangpinfenleiDetail
-		}, {
-			path: 'shangpinfenleiAdd',
-			component: shangpinfenleiAdd
-		}
-		, {
-			path: 'cartList',
-			component: cartList
-		}
-		, {
-			path: 'shangpinxinxiList',
-			component: shangpinxinxiList
-		}, {
-			path: 'shangpinxinxiDetail',
-			component: shangpinxinxiDetail
-		}, {
-			path: 'shangpinxinxiAdd',
-			component: shangpinxinxiAdd
-		}
-		, {
-			path: 'shangjiaList',
-			component: shangjiaList
-		}, {
-			path: 'shangjiaDetail',
-			component: shangjiaDetail
-		}, {
-			path: 'shangjiaAdd',
-			component: shangjiaAdd
-		}
-		, {
-			path: 'dingdanpeisongList',
-			component: dingdanpeisongList
-		}, {
-			path: 'dingdanpeisongDetail',
-			component: dingdanpeisongDetail
-		}, {
-			path: 'dingdanpeisongAdd',
-			component: dingdanpeisongAdd
-		}
-		, {
-			path: 'peisongyuanList',
-			component: peisongyuanList
-		}, {
-			path: 'peisongyuanDetail',
-			component: peisongyuanDetail
-		}, {
-			path: 'peisongyuanAdd',
-			component: peisongyuanAdd
-		}
-		, {
-			path: 'chatMessageList',
-			component: chatMessageList
-		}, {
-			path: 'chatMessageDetail',
-			component: chatMessageDetail
-		}, {
-			path: 'chatMessageAdd',
-			component: chatMessageAdd
-		}
-		, {
-			path: 'chatFriendList',
-			component: chatFriendList
-		}, {
-			path: 'chatFriendDetail',
-			component: chatFriendDetail
-		}, {
-			path: 'chatFriendAdd',
-			component: chatFriendAdd
-		}
-		, {
-			path: 'order_confirm',
-			component: order_confirm
-		}
-		, {
-			path: 'ordersList',
-			component: ordersList
-		}
-		]
-	},
-	{
-		path: '/login',
-		component: login
-	}
-	,{
-		path: '/yonghuRegister',
-		component: yonghuRegister
-	}
+const routes = [
+  {
+    path: '/',
+    redirect: '/index/home',
+  },
+  {
+    path: '/index',
+    component: index,
+    children: [
+      {
+        path: 'home',
+        component: home,
+      },
+      {
+        path: 'newsList',
+        component: newsList,
+      },
+      {
+        path: 'yonghuList',
+        component: yonghuList,
+      },
+      {
+        path: 'yonghuDetail',
+        component: yonghuDetail,
+      },
+      {
+        path: 'yonghuAdd',
+        component: yonghuAdd,
+      },
+      {
+        path: 'yonghuCenter',
+        component: yonghuCenter,
+      },
+      {
+        path: 'tuangoushangpinList',
+        component: tuangoushangpinList,
+      },
+      {
+        path: 'tuangoushangpinDetail',
+        component: tuangoushangpinDetail,
+      },
+      {
+        path: 'tuangoushangpinAdd',
+        component: tuangoushangpinAdd,
+      },
+      {
+        path: 'storeupList',
+        component: storeupList,
+      },
+      {
+        path: 'addressList',
+        component: addressList,
+      },
+      {
+        path: 'shangpinfenleiList',
+        component: shangpinfenleiList,
+      },
+      {
+        path: 'shangpinfenleiDetail',
+        component: shangpinfenleiDetail,
+      },
+      {
+        path: 'shangpinfenleiAdd',
+        component: shangpinfenleiAdd,
+      },
+      {
+        path: 'cartList',
+        component: cartList,
+      },
+      {
+        path: 'shangpinxinxiList',
+        component: shangpinxinxiList,
+      },
+      {
+        path: 'shangpinxinxiDetail',
+        component: shangpinxinxiDetail,
+      },
+      {
+        path: 'shangpinxinxiAdd',
+        component: shangpinxinxiAdd,
+      },
+      {
+        path: 'shangjiaList',
+        component: shangjiaList,
+      },
+      {
+        path: 'shangjiaDetail',
+        component: shangjiaDetail,
+      },
+      {
+        path: 'shangjiaAdd',
+        component: shangjiaAdd,
+      },
+      {
+        path: 'dingdanpeisongList',
+        component: dingdanpeisongList,
+      },
+      {
+        path: 'dingdanpeisongDetail',
+        component: dingdanpeisongDetail,
+      },
+      {
+        path: 'dingdanpeisongAdd',
+        component: dingdanpeisongAdd,
+      },
+      {
+        path: 'peisongyuanList',
+        component: peisongyuanList,
+      },
+      {
+        path: 'peisongyuanDetail',
+        component: peisongyuanDetail,
+      },
+      {
+        path: 'peisongyuanAdd',
+        component: peisongyuanAdd,
+      },
+      {
+        path: 'chatMessageList',
+        component: chatMessageList,
+      },
+      {
+        path: 'chatMessageDetail',
+        component: chatMessageDetail,
+      },
+      {
+        path: 'chatMessageAdd',
+        component: chatMessageAdd,
+      },
+      {
+        path: 'chatFriendList',
+        component: chatFriendList,
+      },
+      {
+        path: 'chatFriendDetail',
+        component: chatFriendDetail,
+      },
+      {
+        path: 'chatFriendAdd',
+        component: chatFriendAdd,
+      },
+      {
+        path: 'order_confirm',
+        component: order_confirm,
+      },
+      {
+        path: 'ordersList',
+        component: ordersList,
+      },
+    ],
+  },
+  {
+    path: '/login',
+    component: login,
+  },
+  {
+    path: '/yonghuRegister',
+    component: yonghuRegister,
+  },
 ]
 
 const router = createRouter({
   history: createWebHashHistory(process.env.BASE_URL),
-  routes
+  routes,
 })
 
 export default router

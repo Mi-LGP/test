@@ -5,7 +5,9 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "format": "prettier --write \"src/**/*.{vue,js,json,css,scss}\" babel.config.js vue.config.js jsconfig.json",
+    "format:check": "prettier --check \"src/**/*.{vue,js,json,css,scss}\" babel.config.js vue.config.js jsconfig.json"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.0.10",
@@ -38,6 +40,7 @@
     "@vue/cli-service": "~5.0.0",
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^8.0.3",
+    "prettier": "^3.3.3",
     "sass": "^1.32.7",
     "sass-loader": "^12.0.0",
     "svg-sprite-loader": "^6.0.9"

@@ -1,30 +1,25 @@
 package com.cl.dao;
 
-import com.cl.entity.AddressEntity;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
-import java.util.List;
-import java.util.Map;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;
-
-import org.apache.ibatis.annotations.Param;
+import com.cl.entity.AddressEntity;
 import com.cl.entity.view.AddressView;
-
+import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 地址
- * 
- * @author 
- * @email 
+ *
+ * @author
+ * @email
  * @date 2025-04-06 15:12:26
  */
 public interface AddressDao extends BaseMapper<AddressEntity> {
-	
-	List<AddressView> selectListView(@Param("ew") Wrapper<AddressEntity> wrapper);
 
-	List<AddressView> selectListView(Pagination page,@Param("ew") Wrapper<AddressEntity> wrapper);
-	
-	AddressView selectView(@Param("ew") Wrapper<AddressEntity> wrapper);
+  List<AddressView> selectListView(@Param("ew") Wrapper<AddressEntity> wrapper);
 
+  List<AddressView> selectListView(Pagination page, @Param("ew") Wrapper<AddressEntity> wrapper);
 
+  AddressView selectView(@Param("ew") Wrapper<AddressEntity> wrapper);
 }

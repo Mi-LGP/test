@@ -1,7 +1,5 @@
 package com.cl.config;
 
-import java.io.FileWriter;
-import java.io.IOException;
 
 /* *
  *类名：AlipayConfig
@@ -13,6 +11,4 @@ import java.io.IOException;
  *该代码仅供学习和研究支付宝接口使用，只是提供一个参考。
  */
 
-public class AlipayConfig {
-    }
-
+public class AlipayConfig {}

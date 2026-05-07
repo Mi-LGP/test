@@ -6,27 +6,27 @@ import 'element-plus/dist/index.css'
 import '@/assets/css/style.scss'
 import store from './store'
 const app = createApp(App)
-app.config.warnHandler = () => null;
+app.config.warnHandler = () => null
 //地图
-import VueAMap, { initAMapApiLoader } from "@vuemap/vue-amap";
-import "@vuemap/vue-amap/dist/style.css"
+import VueAMap, { initAMapApiLoader } from '@vuemap/vue-amap'
+import '@vuemap/vue-amap/dist/style.css'
 initAMapApiLoader({
-  key: "c4ae6ed30bc3f01acf60971dd5d65e7b",
-  securityJsCode:'4d49f68235e05c86c862eeb230ddfc05',
+  key: 'c4ae6ed30bc3f01acf60971dd5d65e7b',
+  securityJsCode: '4d49f68235e05c86c862eeb230ddfc05',
   plugins: [
-    "AMap.Autocomplete",
-    "AMap.PlaceSearch",
-    "AMap.Scale",
-    "AMap.OverView",
-    "AMap.ToolBar",
-    "AMap.MapType",
-    "AMap.PolyEditor",
-    "AMap.CircleEditor",
-    "AMap.Geocoder",
-    "AMap.Geolocation",
-	"AMap.Marker"
+    'AMap.Autocomplete',
+    'AMap.PlaceSearch',
+    'AMap.Scale',
+    'AMap.OverView',
+    'AMap.ToolBar',
+    'AMap.MapType',
+    'AMap.PolyEditor',
+    'AMap.CircleEditor',
+    'AMap.Geocoder',
+    'AMap.Geolocation',
+    'AMap.Marker',
   ],
-});
+})
 app.use(VueAMap)
 
 import http from './utils/http.js'
@@ -44,8 +44,8 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 }
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 import ElementPlus from 'element-plus'
-app.use(ElementPlus,{
-	locale:zhCn
+app.use(ElementPlus, {
+  locale: zhCn,
 })
 
 //echarts
@@ -55,25 +55,23 @@ import * as echarts from 'echarts'
 import printJS from 'print-js'
 
 //富文本
-import Editor from "@/components/common/Editor";
+import Editor from '@/components/common/Editor'
 app.component('editor', Editor)
 //上传组件
-import upload from "@/components/common/upload";
+import upload from '@/components/common/upload'
 app.component('uploads', upload)
 
 //md5
 import md5 from 'js-md5'
 
-import JsonExcel from "vue-json-excel3";
-app.component("downloadExcel", JsonExcel);
+import JsonExcel from 'vue-json-excel3'
+app.component('downloadExcel', JsonExcel)
 app.config.globalProperties.$config = config.get()
 app.config.globalProperties.$project = config.getProjectName()
 app.config.globalProperties.$echarts = echarts
 app.config.globalProperties.$toolUtil = toolUtil
 app.config.globalProperties.$md5 = md5
 app.config.globalProperties.$http = http // ajax请求方法
-
-
 
 app.use(store)
 app.use(router)

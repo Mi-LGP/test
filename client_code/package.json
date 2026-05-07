@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "build": "vue-cli-service build",
+    "format": "prettier --write \"src/**/*.{vue,js,json,css,scss}\" babel.config.js vue.config.js jsconfig.json",
+    "format:check": "prettier --check \"src/**/*.{vue,js,json,css,scss}\" babel.config.js vue.config.js jsconfig.json"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.0.10",
@@ -28,6 +30,7 @@
     "@vue/cli-plugin-router": "~5.0.0",
     "@vue/cli-plugin-vuex": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
+    "prettier": "^3.3.3",
     "sass": "^1.32.7",
     "sass-loader": "^12.0.0"
   },
