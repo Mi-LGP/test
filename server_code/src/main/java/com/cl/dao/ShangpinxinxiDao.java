@@ -23,4 +23,6 @@ public interface ShangpinxinxiDao extends BaseMapper<ShangpinxinxiEntity> {
       Pagination page, @Param("ew") Wrapper<ShangpinxinxiEntity> wrapper);
 
   ShangpinxinxiView selectView(@Param("ew") Wrapper<ShangpinxinxiEntity> wrapper);
+
+  List<ShangpinxinxiView> selectHotRanking();
 }

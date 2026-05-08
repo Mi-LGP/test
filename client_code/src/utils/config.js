@@ -35,6 +35,16 @@ const config = {
           ],
         },
         {
+          name: '热销排行',
+          icon: '',
+          child: [
+            {
+              name: '热销排行',
+              url: '/index/shangpinxinxiHotRanking',
+            },
+          ],
+        },
+        {
           name: '商品信息管理',
           icon: '',
           child: [

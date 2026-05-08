@@ -32,6 +32,19 @@
 		SELECT * FROM shangpinxinxi  shangpinxinxi <where> 1=1 ${ew.sqlSegment}</where>
 	</select>
 
-
-
+    <select id="selectHotRanking" resultType="com.cl.entity.view.ShangpinxinxiView">
+        SELECT 
+            s.*, 
+            (IFNULL(s.storeup_number, 0) + IFNULL(s.discuss_number, 0) + IFNULL(o.total_sales, 0)) as score
+        FROM 
+            shangpinxinxi s
+        LEFT JOIN (
+            SELECT goodid, SUM(buynumber) as total_sales 
+            FROM orders 
+            WHERE tablename = 'shangpinxinxi'
+            GROUP BY goodid
+        ) o ON s.id = o.goodid
+        ORDER BY score DESC
+        LIMIT 10
+    </select>
 </mapper>

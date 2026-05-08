@@ -17,6 +17,16 @@ import org.apache.commons.beanutils.BeanUtils;
 public class ShangpinxinxiView extends ShangpinxinxiEntity implements Serializable {
   private static final long serialVersionUID = 1L;
 
+  private Double score;
+
+  public Double getScore() {
+    return score;
+  }
+
+  public void setScore(Double score) {
+    this.score = score;
+  }
+
   public ShangpinxinxiView() {}
 
   public ShangpinxinxiView(ShangpinxinxiEntity shangpinxinxiEntity) {

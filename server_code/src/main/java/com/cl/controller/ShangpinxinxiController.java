@@ -202,4 +202,11 @@ public class ShangpinxinxiController {
             MPUtil.sort(MPUtil.between(MPUtil.likeOrEq(ew, shangpinxinxi), params), params));
     return R.ok().put("data", count);
   }
+
+  /** 热销排行 */
+  @IgnoreAuth
+  @RequestMapping("/hotRanking")
+  public R hotRanking() {
+    return R.ok().put("data", shangpinxinxiService.selectHotRanking());
+  }
 }

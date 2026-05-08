@@ -44,4 +44,9 @@ public class ShangpinxinxiServiceImpl extends ServiceImpl<ShangpinxinxiDao, Shan
   public ShangpinxinxiView selectView(Wrapper<ShangpinxinxiEntity> wrapper) {
     return baseMapper.selectView(wrapper);
   }
+
+  @Override
+  public List<ShangpinxinxiView> selectHotRanking() {
+    return baseMapper.selectHotRanking();
+  }
 }

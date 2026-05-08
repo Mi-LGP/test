@@ -25,4 +25,6 @@ public interface ShangpinxinxiService extends IService<ShangpinxinxiEntity> {
   ShangpinxinxiView selectView(@Param("ew") Wrapper<ShangpinxinxiEntity> wrapper);
 
   PageUtils queryPage(Map<String, Object> params, Wrapper<ShangpinxinxiEntity> wrapper);
+
+  List<ShangpinxinxiView> selectHotRanking();
 }

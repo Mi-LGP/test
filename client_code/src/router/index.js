@@ -20,6 +20,7 @@ import cartList from '@/views/pages/shop_order/cart'
 import shangpinxinxiList from '@/views/pages/shangpinxinxi/list'
 import shangpinxinxiDetail from '@/views/pages/shangpinxinxi/formModel'
 import shangpinxinxiAdd from '@/views/pages/shangpinxinxi/formAdd'
+import shangpinxinxiHotRanking from '@/views/pages/shangpinxinxi/hotranking'
 import shangjiaList from '@/views/pages/shangjia/list'
 import shangjiaDetail from '@/views/pages/shangjia/formModel'
 import shangjiaAdd from '@/views/pages/shangjia/formAdd'
@@ -118,6 +119,10 @@ const routes = [
       {
         path: 'shangpinxinxiAdd',
         component: shangpinxinxiAdd,
+      },
+      {
+        path: 'shangpinxinxiHotRanking',
+        component: shangpinxinxiHotRanking,
       },
       {
         path: 'shangjiaList',
