@@ -20,7 +20,7 @@
     return
   }
   echarts.registerTheme('theme', {
-    color: ['#1043a9', '#6be6c1', '#626c91', '#a0a7e6', '#c4ebad', '#96dee8'],
+    color: ['#2563eb', '#0ea5e9', '#6366f1', '#22c55e', '#f59e0b', '#94a3b8'],
     backgroundColor: 'rgba(252,252,252,0)',
     textStyle: {},
     title: {

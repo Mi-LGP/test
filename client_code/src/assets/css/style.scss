@@ -70,53 +70,55 @@ p > img {
   height: auto !important;
 }
 body {
-  --theme: #c02c38;
+  --theme: #ea580c;
 }
 /*自定义主题色(全局)*/
 :root {
   /*默认主题*/
-  --title: 16px;
-  --font: 14px !important;
-  --color: #333;
-  --background: rgba(255, 192, 203, 0.1);
-  --border: 1px solid #eee;
-  --border-bottom: 1px solid #eee;
-  --border-color: #eee;
+  --title: 17px;
+  --font: 15px !important;
+  --color: #422006;
+  --background: rgba(254, 243, 199, 0.35);
+  --border: 1px solid #fde68a;
+  --border-bottom: 1px solid #fde68a;
+  --border-color: #fde68a;
   --height: 36px;
   --line-height: 36px;
 
-  /*自定义主题*/
-  --theme-color: #c02c38;
-  --theme-color50: #9896f150;
-  --theme2-color: #c45a65;
-  --theme2-color10: #edb1f110;
-  --theme2-color20: #edb1f120;
-  --theme2-color30: #edb1f130;
-  --theme2-color50: #edb1f150;
-  --theme3-color: #7c1823;
+  /*自定义主题 — 暖橙 + 清新绿*/
+  --theme-color: #f97316;
+  --theme-color50: rgba(249, 115, 22, 0.35);
+  --theme2-color: #16a34a;
+  --theme2-color10: rgba(22, 163, 74, 0.08);
+  --theme2-color20: rgba(22, 163, 74, 0.15);
+  --theme2-color30: rgba(22, 163, 74, 0.22);
+  --theme2-color50: rgba(22, 163, 74, 0.35);
+  --theme3-color: #c2410c;
 
   /*默认按钮*/
-  --button-height: 36px;
-  --button-line-height: 36px;
-  --button-padding: 0 20px !important;
+  --button-height: 40px;
+  --button-line-height: 40px;
+  --button-padding: 0 22px !important;
   --button-color: #fff;
-  --button-background: rgba(255, 192, 203, 1);
-  --button-border: 1px solid rgba(255, 192, 203, 0.5);
-  --button-border-color: rgba(255, 192, 203, 0.5);
-  --button-border-radius: 20px;
+  --button-background: rgba(249, 115, 22, 0.15);
+  --button-border: 1px solid rgba(234, 88, 12, 0.35);
+  --button-border-color: rgba(234, 88, 12, 0.35);
+  --button-border-radius: 12px;
 }
 /*列表页*/
 
 .list-page {
   width: 100%;
   margin: 20px auto;
-  padding: 20px 16%;
-  background: #fff;
+  padding: 24px 16% 32px;
+  background: #fffef8;
   overflow: hidden;
   font-size: 16px;
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
+  border-radius: 16px;
+  box-shadow: 0 12px 40px rgba(234, 88, 12, 0.06);
 }
 
 .list-page .list_search {
