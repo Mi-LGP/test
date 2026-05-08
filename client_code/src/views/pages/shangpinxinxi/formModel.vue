@@ -213,7 +213,7 @@
                 <span class="del" @click="commentDel(item)" style="cursor: pointer">删除</span>
               </div>
               <div class="comment_reply" v-if="item.reply">
-                回复：<span v-html="item.reply"></span>
+                商家回复：<span v-html="item.reply"></span>
               </div>
             </div>
           </div>
