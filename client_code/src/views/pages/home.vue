@@ -302,9 +302,10 @@ init()
 .newsList_view .ntitle .n1 {
   display: inline-block;
   font-size: 32px;
-  color: #333;
-  font-weight: 600;
+  color: #9a3412;
+  font-weight: 700;
   padding-bottom: 10px;
+  letter-spacing: 1px;
 }
 .newsList_view .ntitle .n2 {
   display: none;
@@ -329,8 +330,9 @@ init()
 .newsList_view .nlist ul li {
   width: 48%;
   text-align: left;
-  background: #fff;
-  border: 0px dashed #aaa;
+  background: #fffef8;
+  border: 1px solid rgba(253, 230, 138, 0.55);
+  border-radius: 16px;
   cursor: pointer;
   display: flex;
   flex-wrap: wrap;
@@ -338,9 +340,18 @@ init()
   justify-content: space-between;
   margin: 0 0 30px;
   padding: 20px;
+  box-shadow: 0 10px 28px rgba(234, 88, 12, 0.07);
+  transition:
+    background 0.28s ease,
+    transform 0.26s ease,
+    box-shadow 0.28s ease,
+    border-color 0.28s ease;
 }
 .newsList_view .nlist ul li:hover {
   background: var(--theme);
+  transform: translateY(-4px);
+  box-shadow: 0 18px 44px rgba(234, 88, 12, 0.2);
+  border-color: rgba(255, 255, 255, 0.35);
 }
 .newsList_view .nlist ul li:last-child {
   border-bottom: none;
@@ -411,10 +422,19 @@ init()
 }
 .newsList_view .nmore span {
   display: inline-block;
-  background: var(--theme);
-  padding: 5px 10px;
+  background: linear-gradient(90deg, #ea580c 0%, #f97316 100%);
+  padding: 8px 22px;
   font-size: 16px;
   color: #fff;
+  border-radius: 999px;
+  box-shadow: 0 8px 22px rgba(234, 88, 12, 0.28);
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease;
+}
+.newsList_view .nmore span:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(234, 88, 12, 0.35);
 }
 /* 自定义 end*/
 

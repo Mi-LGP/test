@@ -5,6 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "postbuild": "node scripts/sync-dist-to-server.js",
+    "sync:server": "node scripts/sync-dist-to-server.js",
     "format": "prettier --write \"src/**/*.{vue,js,json,css,scss}\" babel.config.js vue.config.js jsconfig.json",
     "format:check": "prettier --check \"src/**/*.{vue,js,json,css,scss}\" babel.config.js vue.config.js jsconfig.json"
   },

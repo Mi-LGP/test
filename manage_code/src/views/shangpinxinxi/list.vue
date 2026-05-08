@@ -15,6 +15,18 @@
               </el-input>
             </div>
           </div>
+          <div class="search_view">
+            <div class="search_label">商品名称：</div>
+            <div class="search_box">
+              <el-input
+                class="search_inp"
+                v-model="searchQuery.shangpinmingcheng"
+                placeholder="商品名称"
+                clearable
+              >
+              </el-input>
+            </div>
+          </div>
           <div class="search_btn_view">
             <el-button class="search_btn" type="primary" @click="searchClick()" size="small"
               >搜索</el-button
@@ -291,6 +303,9 @@ const getList = () => {
   params['order'] = 'desc'
   if (searchQuery.value.shangpinbianhao && searchQuery.value.shangpinbianhao != '') {
     params['shangpinbianhao'] = '%' + searchQuery.value.shangpinbianhao + '%'
+  }
+  if (searchQuery.value.shangpinmingcheng && searchQuery.value.shangpinmingcheng != '') {
+    params['shangpinmingcheng'] = '%' + searchQuery.value.shangpinmingcheng + '%'
   }
   context
     .$http({

@@ -341,8 +341,9 @@ init()
     border-color: var(--theme-color);
   }
   :deep(.el-button--success:hover) {
-    background: var(--theme2-color);
-    border-color: var(--theme2-color);
+    background: var(--theme3-color);
+    border-color: var(--theme3-color);
+    filter: brightness(1.02);
   }
   // 登出按钮
   :deep(.el-button--danger) {
@@ -386,7 +387,7 @@ init()
 
 .contain_view {
   margin: 0;
-  background: #fff;
+  background: linear-gradient(180deg, #fffbeb 0%, #ffffff 28%, #fff7ed 100%);
   position: relative;
   height: calc(100% - 60px);
 }
@@ -450,23 +451,32 @@ init()
 }
 </style>
 <style>
+.home {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #fffbeb 0%, #ffffff 40%, #fff7ed 100%);
+}
+
 .index_top {
   width: 100%;
   display: flex;
   align-items: center;
   height: 110px;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
   justify-content: space-between;
   padding: 0px 16%;
   box-sizing: border-box;
   z-index: 1002;
   position: relative;
+  border-bottom: 1px solid rgba(253, 230, 138, 0.65);
+  box-shadow: 0 10px 40px rgba(234, 88, 12, 0.06);
 }
 
 .index_top .index_top_title {
-  font-size: 20px;
-  color: rgb(0, 0, 0);
-  font-weight: bold;
+  font-size: 22px;
+  color: #9a3412;
+  font-weight: 700;
+  letter-spacing: 0.5px;
 }
 
 .index_top .index_top_right {
@@ -587,30 +597,32 @@ init()
 }
 .bottom_view {
   width: 100%;
-  background: #242424;
+  background: linear-gradient(180deg, #14532d 0%, #166534 45%, #15803d 100%);
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: 20px 0px;
+  padding: 28px 0px;
   min-height: 130px;
-  border-width: 0px 0px 0px;
+  border-width: 0px;
   border-style: solid;
   border-color: #d6dee0;
   font-size: 16px;
-  color: #fff;
+  color: #ecfdf5;
   line-height: 1.8;
   margin-top: 0px;
+  box-shadow: 0 -12px 40px rgba(22, 101, 52, 0.15);
 }
 
 .menu_scrollbar {
   width: 100%;
-  margin: 0 auto 5px;
-  background: var(--theme);
+  margin: 0 auto 8px;
+  background: linear-gradient(90deg, #ea580c 0%, #f97316 52%, #fb923c 100%);
   border-width: 0px;
   border-style: solid;
   border-color: rgb(239, 239, 239);
   border-radius: 0;
+  box-shadow: 0 10px 28px rgba(234, 88, 12, 0.18);
 }
 .menu_scrollbar .el-scrollbar__view {
   padding-bottom: 0px;

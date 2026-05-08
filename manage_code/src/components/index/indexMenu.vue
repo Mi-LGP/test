@@ -224,8 +224,8 @@ init()
       // 二级悬浮
       .second-item:hover {
         padding: 0 40px;
-        color: #f00;
-        background: greenyellow;
+        color: var(--theme);
+        background: rgba(37, 99, 235, 0.08);
         line-height: 50px;
         height: 50px;
       }
@@ -262,8 +262,8 @@ init()
       // 二级悬浮
       .second-item:hover {
         padding: 0 40px;
-        color: #f00;
-        background: greenyellow;
+        color: var(--theme);
+        background: rgba(37, 99, 235, 0.08);
         line-height: 50px;
         height: 50px;
       }
@@ -285,14 +285,14 @@ init()
 .main-container {
   margin: 0px 0px 0px 210px;
   padding: 80px 0px 0px !important;
-  background: #f7f7f7;
+  background: #f1f5f9;
   overflow: hidden;
 }
 
 /* 总盒子 */
 .menu_wrapper {
   width: 210px;
-  background: #fff;
+  background: #ffffff;
   height: 100%;
   overflow: hidden;
   position: fixed;
@@ -301,10 +301,10 @@ init()
   border-width: 0px;
   border-style: solid;
   border-color: rgb(255, 255, 255);
-  padding: 10px;
+  padding: 12px 10px 24px;
   transition: all 0.3s ease-in-out 0s;
   font-size: 15px;
-  box-shadow: 2px 0 6px 0 rgba(69, 90, 100, 0.1);
+  box-shadow: 4px 0 24px rgba(15, 23, 42, 0.06);
 }
 /* 菜单盒子 */
 .menu_view {

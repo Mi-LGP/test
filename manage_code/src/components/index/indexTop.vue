@@ -521,7 +521,8 @@ const addChat = () => {
 <style>
 /*总盒子*/
 .top_view {
-  background: var(--theme);
+  background: linear-gradient(90deg, #1e3a8a 0%, #2563eb 48%, #3b82f6 100%);
+  box-shadow: 0 8px 24px rgba(30, 58, 138, 0.22);
   height: 80px;
   width: 100%;
   display: flex;

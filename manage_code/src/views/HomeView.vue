@@ -601,40 +601,35 @@ init()
   margin: 0px 1% 20px;
   box-sizing: border-box;
   border: 0px;
-  border-radius: 10px;
+  border-radius: 14px;
   flex: 1;
   padding: 0 1%;
+  transition:
+    transform 0.28s ease,
+    box-shadow 0.28s ease;
 }
 
 .home_view .count_list .card_view:nth-child(1) {
-  background: linear-gradient(90deg, rgba(236, 166, 232, 1) 0%, rgba(193, 149, 239, 1) 100%);
+  background: linear-gradient(135deg, #1e40af 0%, #2563eb 55%, #3b82f6 100%);
 }
 .home_view .count_list .card_view:nth-child(2) {
-  background: linear-gradient(90deg, rgba(160, 217, 252, 1) 0%, rgba(135, 174, 245, 1) 100%);
+  background: linear-gradient(135deg, #4338ca 0%, #4f46e5 55%, #6366f1 100%);
 }
 .home_view .count_list .card_view:nth-child(3) {
-  background: linear-gradient(90deg, rgba(253, 162, 146, 1) 0%, rgba(252, 161, 190, 1) 100%);
+  background: linear-gradient(135deg, #0369a1 0%, #0ea5e9 55%, #38bdf8 100%);
 }
 .home_view .count_list .card_view:nth-child(4) {
-  background: linear-gradient(90deg, rgba(57, 236, 218, 1) 0%, rgba(55, 207, 232, 1) 100%);
+  background: linear-gradient(135deg, #0f766e 0%, #14b8a6 55%, #2dd4bf 100%);
 }
 .home_view .count_list .card_view:nth-child(2n + 5) {
-  background: linear-gradient(90deg, rgba(236, 166, 232, 1) 0%, rgba(193, 149, 239, 1) 100%);
+  background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 50%, #60a5fa 100%);
 }
 .home_view .count_list .card_view:nth-child(2n + 6) {
-  background: linear-gradient(90deg, rgba(160, 217, 252, 1) 0%, rgba(135, 174, 245, 1) 100%);
+  background: linear-gradient(135deg, #475569 0%, #64748b 50%, #94a3b8 100%);
 }
-.home_view .count_list .card_view:nth-child(1):hover {
-}
-.home_view .count_list .card_view:nth-child(2):hover {
-}
-.home_view .count_list .card_view:nth-child(3):hover {
-}
-.home_view .count_list .card_view:nth-child(4):hover {
-}
-.home_view .count_list .card_view:nth-child(2n + 5):hover {
-}
-.home_view .count_list .card_view:nth-child(2n + 6):hover {
+.home_view .count_list .card_view:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 18px 46px rgba(15, 23, 42, 0.22);
 }
 
 /*head 总盒子*/

@@ -73,7 +73,7 @@ const makeMenu = menu => {
 </script>
 <style lang="scss" scoped>
 a:hover {
-  background: #00c292;
+  background: rgba(37, 99, 235, 0.12);
 }
 
 .el-main {
@@ -82,7 +82,7 @@ a:hover {
   padding: 80px 0px 0 0px !important;
   margin: 0 0 0 0px;
   overflow: hidden;
-  background: rgba(23, 139, 23, 0.1);
+  background: rgba(37, 99, 235, 0.06);
   transition: all 0.3s ease-in-out 0s;
 }
 .main_view {
