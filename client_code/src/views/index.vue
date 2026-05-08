@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div class="index_top">
-      <div class="index_top_title"><span>基于SpribgBoot的社区团购系统</span></div>
+      <div class="index_top_title"><span>基于SpringBoot的社区团购系统</span></div>
       <div class="index_top_right">
         <el-button
           v-if="!Token"

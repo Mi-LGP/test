@@ -36,7 +36,8 @@
     <select id="selectListView"
 		resultType="com.cl.entity.view.OrdersView" >
 
-		SELECT  orders.* FROM orders  orders 	        
+        SELECT  orders.*, t2.yonghu as yonghu FROM orders  orders
+        LEFT JOIN yonghu t2 ON orders.userid = t2.id
         <where> 1=1 ${ew.sqlSegment}</where>
 	</select>
 	

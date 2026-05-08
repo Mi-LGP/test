@@ -368,6 +368,19 @@
           </template>
         </el-table-column>
         <el-table-column
+            min-width="140"
+            :resizable="true"
+            :sortable="true"
+            align="left"
+            header-align="left"
+            prop="yonghu"
+            label="用户名称"
+        >
+          <template #default="scope">
+            {{ scope.row.yonghu }}
+          </template>
+        </el-table-column>
+        <el-table-column
           min-width="140"
           :resizable="true"
           :sortable="true"
@@ -984,6 +997,7 @@ const exportClick = () => {
       '是否审核',
       '回复内容',
       '商户名称',
+      '用户名称',
       '团购编号',
     ]
     const filterVal = [
@@ -1010,6 +1024,7 @@ const exportClick = () => {
       'sfsh',
       'shhf',
       'shangjia',
+      'yonghu',
       'groupno',
     ]
     excel.export_json_to_excel2(tHeader, selRows.value, filterVal, formName)
@@ -1044,6 +1059,7 @@ const approvalClick = row => {
     sfsh: row.sfsh,
     shhf: row.shhf,
     shangjia: row.shangjia,
+    yonghu: row.yonghu,
     groupno: row.groupno,
   }
   nextTick(() => {

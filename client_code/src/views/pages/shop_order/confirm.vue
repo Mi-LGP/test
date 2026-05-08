@@ -178,7 +178,7 @@ const payClick = async () => {
       tel: addressList.value[addressIndex.value].phone,
       consignee: addressList.value[addressIndex.value].name,
       remark: remark.value,
-      status: '未支付',
+      status: '已支付',
       goods: data,
     })
   }

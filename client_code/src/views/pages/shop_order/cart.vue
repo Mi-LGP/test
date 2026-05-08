@@ -74,12 +74,14 @@
       </el-table-column>
       <el-table-column label="操作" :resizable="true" align="left" header-align="left">
         <template #default="scope">
-          <el-button class="view_btn" type="primary" @click.native="detailClick(scope.row)"
+          <div style="display: flex; gap: 8px">
+            <el-button class="view_btn" type="primary" @click.native="detailClick(scope.row)"
             >查看详情</el-button
-          >
-          <el-button class="del_btn" type="danger" @click.native="delClick(scope.row.id)"
+            >
+            <el-button class="del_btn" type="danger" @click.native="delClick(scope.row.id)"
             >删除</el-button
-          >
+            >
+          </div>
         </template>
       </el-table-column>
     </el-table>

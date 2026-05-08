@@ -19,6 +19,8 @@ public class OrdersView extends OrdersEntity implements Serializable {
 
   public OrdersView() {}
 
+  private String yonghu;
+
   public OrdersView(OrdersEntity ordersEntity) {
     try {
       BeanUtils.copyProperties(this, ordersEntity);
@@ -26,5 +28,13 @@ public class OrdersView extends OrdersEntity implements Serializable {
       // TODO Auto-generated catch block
       e.printStackTrace();
     }
+  }
+
+  public String getYonghu() {
+    return yonghu;
+  }
+
+  public void setYonghu(String yonghu) {
+    this.yonghu = yonghu;
   }
 }

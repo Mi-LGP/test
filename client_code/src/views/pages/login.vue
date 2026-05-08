@@ -2,7 +2,7 @@
   <div>
     <div class="login_view">
       <div class="outTitle_view">
-        <div class="outTilte">基于SpribgBoot的社区团购系统登录</div>
+        <div class="outTilte">基于SpringBoot的社区团购系统登录</div>
       </div>
       <el-form :model="loginForm" class="login_form">
         <div class="list_item" v-if="loginType == 1">
@@ -213,6 +213,7 @@ onMounted(() => {
   transition:
     box-shadow 0.3s ease,
     transform 0.3s ease;
+  margin-left: 50vw;
 }
 
 .login_view .outTitle_view {
@@ -237,6 +238,8 @@ onMounted(() => {
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  margin-left: 35vw;
+  white-space: nowrap;
 }
 
 .login_view .login_form .list_item {
