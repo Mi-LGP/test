@@ -174,23 +174,34 @@ onMounted(() => {
     // 默认样式
     .tab {
       cursor: pointer;
-      border: 0px solid #ccc;
-      border-radius: 4px;
-      color: #333;
+      border: 1px solid #e2e8f0;
+      border-radius: 999px;
+      color: #334155;
       background: #fff;
       line-height: 40px;
       text-align: center;
       height: 40px;
+      transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.15s ease;
+    }
+    .tab:hover {
+      border-color: rgba(37, 99, 235, 0.35);
+      color: var(--theme);
     }
     // 选中样式
     .tabActive {
       cursor: pointer;
-      border-radius: 5px 30px 30px 5px;
+      border-radius: 999px;
       color: #fff;
-      background: var(--theme);
+      background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 55%, #3b82f6 100%);
+      border-color: transparent;
       line-height: 40px;
       text-align: center;
       height: 40px;
+      box-shadow: 0 10px 26px rgba(37, 99, 235, 0.35);
     }
   }
   // 按钮盒子
@@ -224,22 +235,24 @@ onMounted(() => {
 
 /*表单盒子*/
 .login_form {
-  width: 600px;
+  width: min(560px, 92vw);
   margin: 0 auto;
-  padding: 30px 50px 40px 50px;
-  background: #fff;
+  padding: 36px 44px 40px;
+  background: rgba(255, 255, 255, 0.96);
   font-size: 16px;
-  border-radius: 10px;
+  border-radius: 16px;
   transform: scale(1);
   -webkit-transform: scale(1);
   -ms-transform: scale(1);
   z-index: 5;
+  border: 1px solid rgba(226, 232, 240, 0.95);
+  backdrop-filter: blur(10px);
   box-shadow:
-    0px -3px 5px 0px rgba(0, 0, 0, 0.09),
-    0px 12px 13px 0px rgba(0, 0, 0, 0.17),
-    0px 4px 6px 0px rgba(0, 0, 0, 0.12),
-    0px -12px 30px 0px rgba(0, 0, 0, 0.12),
-    0px 54px 55px 0px rgba(0, 0, 0, 0.25);
+    0 24px 60px rgba(15, 23, 42, 0.14),
+    0 8px 20px rgba(15, 23, 42, 0.08);
+  transition:
+    box-shadow 0.35s ease,
+    transform 0.35s ease;
 }
 
 .login_form:before {
@@ -286,15 +299,24 @@ onMounted(() => {
 /*list_item*/
 .login_form .list_item {
   width: 100%;
-  padding: 0 10px;
+  padding: 10px 14px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  margin: 0 0 20px;
+  margin: 0 0 18px;
+  background: #f8fafc;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.login_form .list_item:focus-within {
+  border-color: rgba(37, 99, 235, 0.45);
   box-shadow:
-    inset 0px -2px 6px 0px rgba(10, 37, 64, 0.35),
-    0px 30px 60px -30px rgba(0, 0, 0, 0.3),
-    0px 50px 100px -20px rgba(50, 50, 93, 0.25);
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 0 0 3px rgba(37, 99, 235, 0.12);
 }
 .login_form .list_item .list_label {
   margin-right: 10px;
@@ -422,27 +444,43 @@ onMounted(() => {
 }
 .login_form .btn_view .login {
   width: 100%;
-  height: 46px;
-  line-height: 46px;
-  background: var(--theme);
+  height: 48px;
+  line-height: 48px;
+  background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 55%, #3b82f6 100%);
   border: 0px solid #ccc;
   font-weight: 600;
-  font-size: 18px;
+  font-size: 17px;
   color: #fff;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   padding: 0;
-  border-radius: 5px;
+  border-radius: 12px;
+  box-shadow: 0 12px 28px rgba(37, 99, 235, 0.35);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
 }
 .login_form .btn_view .login:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.03);
+  box-shadow: 0 16px 34px rgba(37, 99, 235, 0.4);
 }
 .login_form .btn_view .register {
-  background: #fff;
-  border: 2px solid #b8b8b8;
-  font-size: 16px;
-  color: #666;
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  font-size: 15px;
+  color: #475569;
   margin: 0 10px 10px 0;
+  border-radius: 12px;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
 }
 .login_form .btn_view .register:hover {
+  border-color: rgba(37, 99, 235, 0.45);
+  color: #1e293b;
+  background: #fff;
 }
 .login_form .btn_view .forget {
   margin: 0 0 10px;

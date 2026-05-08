@@ -712,10 +712,19 @@ init()
   height: auto;
   margin: 0px 1% 30px;
   box-sizing: border-box;
-  border: 0px solid #ddd;
-  border-radius: 0px;
+  border: 1px solid rgba(226, 232, 240, 0.95);
+  border-radius: 14px;
   padding: 20px 0px 0px;
-  box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 12px 36px rgba(15, 23, 42, 0.08);
+  overflow: hidden;
+  transition:
+    transform 0.28s ease,
+    box-shadow 0.28s ease;
+}
+
+.home_view .card_list .card_view:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 48px rgba(15, 23, 42, 0.12);
 }
 /*head 总盒子*/
 .home_view .card_list .card_view .el-card__header {

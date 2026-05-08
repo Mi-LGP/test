@@ -817,7 +817,7 @@ body {
   padding: 5px 0px;
   display: inline-block;
   align-items: center;
-  background: #none;
+  background: transparent;
   margin: 0 10px 10px 0 !important;
 }
 
@@ -1515,4 +1515,69 @@ body {
 .detail_hot_view .detail_hot_list .detail_hot:hover {
 }
 .detail_hot_view .detail_hot:hover .detail_hot_content .detail_hot_text {
+}
+
+/* ========== 客户端全局增强：层次 / 动效 / 图片自适应 ========== */
+html {
+  scroll-behavior: smooth;
+}
+
+.list-page,
+.detail-page {
+  transition:
+    box-shadow 0.28s ease,
+    background-color 0.28s ease;
+}
+
+.list-page .page_list .data_box .data_view .data_item {
+  border-radius: 14px;
+  transition:
+    transform 0.28s ease,
+    box-shadow 0.28s ease;
+}
+
+.list-page .page_list .data_box .data_view .data_item:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    inset 0 0 0 5px #f7f6f6,
+    0 14px 36px rgba(234, 88, 12, 0.12);
+}
+
+.detail-page .detail_view .info_view .btn_view .addCart_btn,
+.detail-page .detail_view .info_view .btn_view .buyNow_btn,
+.detail-page .detail_view .info_view .btn_view .action_btn,
+.detail-page .detail_view .info_view .btn_view .sucAction_btn {
+  transition:
+    transform 0.2s ease,
+    filter 0.2s ease,
+    box-shadow 0.2s ease;
+  border-radius: 10px !important;
+  padding: 0 14px !important;
+}
+
+.detail-page .detail_view .info_view .btn_view .addCart_btn:hover,
+.detail-page .detail_view .info_view .btn_view .buyNow_btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.03);
+  box-shadow: 0 8px 20px rgba(234, 88, 12, 0.18);
+}
+
+.detail_hot_view .detail_hot_list .detail_hot {
+  border-radius: 12px;
+  overflow: hidden;
+  border-color: rgba(253, 230, 138, 0.85);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.detail_hot_view .detail_hot_list .detail_hot:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 34px rgba(234, 88, 12, 0.14);
+}
+
+.detail-page img,
+.list-page img {
+  max-width: 100%;
+  height: auto;
 }

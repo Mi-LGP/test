@@ -1180,3 +1180,61 @@ body {
   height: 28px;
   line-height: 28px;
 }
+
+/* ========== UI 全局增强：空状态 / 加载 / 动效（不改变业务结构） ========== */
+html {
+  scroll-behavior: smooth;
+}
+
+.center_view .el-table__empty-block {
+  min-height: 200px;
+  padding: 32px 16px;
+}
+
+.center_view .el-table__empty-text {
+  color: #64748b;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+}
+
+.center_view .el-table__body-wrapper {
+  transition: opacity 0.2s ease;
+}
+
+.center_view img {
+  max-width: 100%;
+  height: auto;
+}
+
+.center_view .el-image {
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.center_view .el-image:hover {
+  transform: translateY(-1px);
+}
+
+.center_view .el-dialog__header {
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 14px;
+  margin-right: 0;
+}
+
+.center_view .el-dialog__footer {
+  border-top: 1px solid #f1f5f9;
+  padding-top: 14px;
+}
+
+.edit_form .confirm_btn {
+  transition:
+    background 0.2s ease,
+    transform 0.15s ease,
+    box-shadow 0.2s ease;
+}
+
+.edit_form .confirm_btn:hover {
+  box-shadow: 0 8px 22px rgba(37, 99, 235, 0.35);
+  transform: translateY(-1px);
+}

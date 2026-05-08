@@ -197,23 +197,32 @@ onMounted(() => {
 }
 
 .login_view .login_form {
-  width: 600px;
-  margin: 40px 0 40px 40%;
-  box-shadow: rgb(187, 187, 187) 0px 4px 9px;
-  padding: 30px 60px 30px 20px;
+  width: min(560px, 92vw);
+  margin: 40px auto;
+  box-shadow:
+    0 18px 48px rgba(234, 88, 12, 0.12),
+    0 4px 14px rgba(67, 20, 6, 0.06);
+  padding: 32px 36px 36px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  border-radius: 10px;
-  background: #fff;
-  border: 1px solid #ddd;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(253, 230, 138, 0.65);
+  backdrop-filter: blur(8px);
+  transition:
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
 }
 
 .login_view .outTitle_view {
   display: flex;
   align-items: center;
-  padding: 0px 0px 20px;
-  margin: 0 0 0 40%;
+  justify-content: center;
+  padding: 24px 16px 12px;
+  margin: 0 auto;
+  width: 100%;
+  max-width: min(560px, 92vw);
 }
 .login_view .outTitle_view .outTilte {
   color: rgb(51, 51, 51);
@@ -315,33 +324,49 @@ onMounted(() => {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  padding: 20px 0px 0px 120px;
+  justify-content: center;
+  padding: 24px 0 0;
   width: 100%;
+  gap: 12px;
 }
 .login_view .login_form .btn_view .login {
-  margin: 0px 20px 12px 0px;
-  padding: 0px 10px;
+  margin: 0;
+  padding: 0 28px;
   width: auto;
-  height: 34px;
+  min-height: 42px;
   font-size: 16px;
+  font-weight: 600;
   color: rgb(255, 255, 255);
-  border-radius: 0px;
+  border-radius: 12px;
   border: 0px;
-  background: var(--theme-color);
+  background: linear-gradient(135deg, #ea580c 0%, #f97316 100%);
   cursor: pointer;
-  min-width: 80px;
+  min-width: 120px;
+  box-shadow: 0 10px 26px rgba(234, 88, 12, 0.28);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
+}
+.login_view .login_form .btn_view .login:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.03);
+  box-shadow: 0 14px 32px rgba(234, 88, 12, 0.34);
 }
 .login_view .login_form .btn_view .register {
-  margin: 0px 20px 12px 0px;
-  padding: 0px;
-  width: auto;
-  height: 34px;
+  margin: 0;
+  padding: 0 20px;
+  min-height: 42px;
   font-size: 16px;
-  color: #333;
-  border-radius: 4px;
-  border: 0px;
-  background: none;
+  color: #57534e;
+  border-radius: 12px;
+  border: 1px solid rgba(253, 230, 138, 0.9);
+  background: #fffbeb;
   cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
 }
 .login_view .login_form .btn_view .register:hover {
   color: var(--theme-color);
@@ -369,5 +394,27 @@ onMounted(() => {
   padding: 0px 0px 0px 120px;
   text-align: left;
   width: 100%;
+}
+
+@media (max-width: 576px) {
+  .login_view .login_form .list_item,
+  .login_view .login_form .list_type {
+    flex-wrap: wrap;
+    margin-right: 0;
+  }
+  .login_view .login_form .list_item .list_label,
+  .login_view .login_form .list_type .list_label {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 6px;
+  }
+  .login_view .login_form .list_item .list_inp,
+  .login_view .login_form .list_type .el-select {
+    width: 100% !important;
+  }
+  .login_view .login_form .face {
+    padding-left: 0;
+    text-align: center;
+  }
 }
 </style>

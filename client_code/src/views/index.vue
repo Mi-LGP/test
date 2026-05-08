@@ -785,4 +785,54 @@ init()
 .bread_view .el-breadcrumb .second_breadcrumb .el-breadcrumb__inner.is-link {
   color: #fff !important;
 }
+
+@media (max-width: 992px) {
+  .index_top {
+    padding: 12px 5% !important;
+    height: auto !important;
+    min-height: 72px;
+    flex-wrap: wrap;
+  }
+  .index_top .index_top_title {
+    font-size: 18px !important;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+  .index_top .index_top_right {
+    width: 100%;
+    justify-content: center;
+    margin-right: 0 !important;
+  }
+  .rotation_view {
+    width: 92% !important;
+    margin: 12px auto !important;
+  }
+  .rotation_view .swiper {
+    height: 260px !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .menu_scrollbar .menu_view {
+    height: auto !important;
+    min-height: 52px;
+    flex-wrap: nowrap;
+    justify-content: flex-start !important;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 6px 10px 10px !important;
+  }
+  .menu_scrollbar .menu_view::-webkit-scrollbar {
+    height: 4px;
+  }
+  .menu_scrollbar .menu_view .el-menu-item,
+  .menu_scrollbar .menu_view .el-sub-menu,
+  .menu_scrollbar .menu_view .el-sub-menu .el-sub-menu__title {
+    flex: 0 0 auto;
+    font-size: 14px !important;
+    min-width: auto !important;
+    padding: 0 12px !important;
+  }
+}
 </style>
