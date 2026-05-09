@@ -5,10 +5,10 @@
         <el-breadcrumb separator="Ξ" class="breadcrumb">
           <el-breadcrumb-item class="first_breadcrumb" :to="{ path: '/' }">首页</el-breadcrumb-item>
           <el-breadcrumb-item
-            class="second_breadcrumb"
-            v-for="(item, index) in breadList"
-            :key="index"
-            >{{ item.name }}</el-breadcrumb-item
+              class="second_breadcrumb"
+              v-for="(item, index) in breadList"
+              :key="index"
+          >{{ item.name }}</el-breadcrumb-item
           >
         </el-breadcrumb>
       </div>
@@ -21,10 +21,10 @@
         <div class="search_label">商品编号：</div>
         <div class="search_box">
           <el-input
-            class="search_inp"
-            v-model="searchQuery.shangpinbianhao"
-            placeholder="商品编号"
-            clearable
+              class="search_inp"
+              v-model="searchQuery.shangpinbianhao"
+              placeholder="商品编号"
+              clearable
           >
           </el-input>
         </div>
@@ -33,10 +33,10 @@
         <div class="search_label">商品名称：</div>
         <div class="search_box">
           <el-input
-            class="search_inp"
-            v-model="searchQuery.shangpinmingcheng"
-            placeholder="商品名称"
-            clearable
+              class="search_inp"
+              v-model="searchQuery.shangpinmingcheng"
+              placeholder="商品名称"
+              clearable
           >
           </el-input>
         </div>
@@ -44,37 +44,37 @@
       <div class="search_btn_view">
         <el-button class="search_btn" type="primary" @click="searchClick">搜索</el-button>
         <el-button
-          class="add_btn"
-          type="success"
-          v-if="btnAuth('tuangoushangpin', '新增')"
-          @click="addClick"
-          >新增</el-button
+            class="add_btn"
+            type="success"
+            v-if="btnAuth('tuangoushangpin', '新增')"
+            @click="addClick"
+        >新增</el-button
         >
       </div>
     </el-form>
     <div class="category_view">
       <div
-        class="category"
-        :class="categoryIndex == -1 ? 'categoryActive' : ''"
-        @click="categoryClick(-1)"
+          class="category"
+          :class="categoryIndex == -1 ? 'categoryActive' : ''"
+          @click="categoryClick(-1)"
       >
         全部
       </div>
       <div
-        class="category"
-        :class="categoryIndex == index ? 'categoryActive' : ''"
-        v-for="(item, index) in categoryList"
-        :key="index"
-        @click="categoryClick(index)"
+          class="category"
+          :class="categoryIndex == index ? 'categoryActive' : ''"
+          v-for="(item, index) in categoryList"
+          :key="index"
+          @click="categoryClick(index)"
       >
         {{ item }}
       </div>
     </div>
     <div class="sort-wrapper">
       <el-button
-        class="item price"
-        @click="sortClick('price')"
-        :class="{ active: sortType == 'price' }"
+          class="item price"
+          @click="sortClick('price')"
+          :class="{ active: sortType == 'price' }"
       >
         <el-icon class="icon" v-if="sortType != 'price'"><DCaret /></el-icon>
         <el-icon class="icon desc" v-else-if="sortOrder == 'desc'"><SortDown /></el-icon>
@@ -82,9 +82,9 @@
         价格
       </el-button>
       <el-button
-        class="item storeup"
-        @click="sortClick('storeupNumber')"
-        :class="{ active: sortType == 'storeupNumber' }"
+          class="item storeup"
+          @click="sortClick('storeupNumber')"
+          :class="{ active: sortType == 'storeupNumber' }"
       >
         <el-icon class="icon" v-if="sortType != 'storeupNumber'"><DCaret /></el-icon>
         <el-icon class="icon desc" v-else-if="sortOrder == 'desc'"><SortDown /></el-icon>
@@ -96,51 +96,75 @@
       <div class="data_box">
         <div class="data_view">
           <div
-            class="data_item"
-            v-for="(item, index) in list"
-            :key="index"
-            @click.stop="detailClick(item.id)"
+              class="data_item"
+              v-for="(item, index) in list"
+              :key="index"
+              @click.stop="detailClick(item.id)"
           >
-            <div
-              class="data_img_box"
-              v-if="item.shangpintupian && item.shangpintupian.substr(0, 4) == 'http'"
-              @click.stop="preViewClick(item.shangpintupian)"
-            >
-              <el-image class="data_img" :src="item.shangpintupian" fit="cover"></el-image>
-            </div>
-            <div
-              class="data_img_box"
-              v-else
-              @click.stop="preViewClick($config.url + item.shangpintupian.split(',')[0])"
-            >
-              <el-image
-                class="data_img"
-                :src="item.shangpintupian ? $config.url + item.shangpintupian.split(',')[0] : ''"
-                fit="cover"
-              ></el-image>
+            <div class="img_wrapper">
+              <div
+                  class="data_img_box"
+                  v-if="item.shangpintupian && item.shangpintupian.substr(0, 4) == 'http'"
+                  @click.stop="preViewClick(item.shangpintupian)"
+              >
+                <el-image class="data_img" :src="item.shangpintupian" fit="cover"></el-image>
+              </div>
+              <div
+                  class="data_img_box"
+                  v-else
+                  @click.stop="preViewClick($config.url + item.shangpintupian.split(',')[0])"
+              >
+                <el-image
+                    class="data_img"
+                    :src="item.shangpintupian ? $config.url + item.shangpintupian.split(',')[0] : ''"
+                    fit="cover"
+                ></el-image>
+              </div>
+              <div class="group_badge">
+                <span class="badge_icon">👥</span>
+                <span class="badge_text">{{ item.grouppeople }}人团</span>
+              </div>
+              <div class="stock_badge" v-if="item.alllimittimes !== undefined">
+                <span class="stock_icon">📦</span>
+                <span class="stock_text">{{ item.alllimittimes > 0 ? item.alllimittimes : '售罄' }}</span>
+              </div>
             </div>
             <div class="data_content">
               <div class="data_title1">
                 <span>{{ item.shangpinmingcheng }}</span>
               </div>
-              <div class="data_price">
-                <span>￥{{ item.price }}</span>
+              <div class="price_comparison">
+                <div class="original_price">
+                  <span class="label">原价</span>
+                  <span class="price">¥{{ item.price }}</span>
+                </div>
+                <div class="group_price">
+                  <span class="label">团购价</span>
+                  <div class="price_wrapper">
+                    <span class="price_symbol">¥</span>
+                    <span class="price_value">{{ item.groupprice }}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="save_amount" v-if="item.price && item.groupprice">
+                <span class="save_text">立省</span>
+                <span class="save_value">¥{{ (item.price - item.groupprice).toFixed(2) }}</span>
               </div>
             </div>
           </div>
         </div>
         <el-pagination
-          background
-          :layout="layouts.join(',')"
-          :total="total"
-          :page-size="listQuery.limit"
-          v-model:current-page="listQuery.page"
-          prev-text="上一页"
-          next-text="下一页"
-          :hide-on-single-page="false"
-          :style="{}"
-          @size-change="sizeChange"
-          @current-change="currentChange"
+            background
+            :layout="layouts.join(',')"
+            :total="total"
+            :page-size="listQuery.limit"
+            v-model:current-page="listQuery.page"
+            prev-text="上一页"
+            next-text="下一页"
+            :hide-on-single-page="false"
+            :style="{}"
+            @size-change="sizeChange"
+            @current-change="currentChange"
         />
       </div>
     </div>
@@ -244,29 +268,29 @@ const getList = () => {
     params['order'] = sortOrder.value
   }
   context
-    ?.$http({
-      url: `${tableName}/${centerType.value ? 'page' : 'list'}`,
-      method: 'get',
-      params: params,
-    })
-    .then(res => {
-      listLoading.value = false
-      list.value = res.data.data.list
-      total.value = Number(res.data.data.total)
-    })
+      ?.$http({
+        url: `${tableName}/${centerType.value ? 'page' : 'list'}`,
+        method: 'get',
+        params: params,
+      })
+      .then(res => {
+        listLoading.value = false
+        list.value = res.data.data.list
+        total.value = Number(res.data.data.total)
+      })
 }
 //分类
 const categoryList = ref([])
 const categoryIndex = ref(-1)
 const getCategoryList = () => {
   context
-    ?.$http({
-      url: 'option/shangpinfenlei/shangpinfenlei',
-      method: 'get',
-    })
-    .then(res => {
-      categoryList.value = res.data.data
-    })
+      ?.$http({
+        url: 'option/shangpinfenlei/shangpinfenlei',
+        method: 'get',
+      })
+      .then(res => {
+        categoryList.value = res.data.data
+      })
 }
 const categoryClick = index => {
   listQuery.value.page = 1
@@ -396,149 +420,188 @@ init()
   //列表
   .data_box {
     .data_view {
-      .data_item:nth-of-type(2n - 1) {
-        // 图片盒子
-        .data_img_box {
+      .data_item {
+        position: relative;
+        background: #fff;
+        border-radius: 12px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        cursor: pointer;
+
+        &:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+
+          .data_img_box {
+            .data_img {
+              transform: scale(1.05);
+            }
+          }
+        }
+
+        // 图片包装器
+        .img_wrapper {
+          position: relative;
           width: 100%;
-          // 图片
-          .data_img {
-            object-fit: cover;
+          overflow: hidden;
+
+          // 图片盒子
+          .data_img_box {
             width: 100%;
-            height: 100%;
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+
+            // 图片
+            .data_img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+              transition: transform 0.3s ease;
+            }
+          }
+
+          // 团购徽章
+          .group_badge {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: #fff;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-weight: 500;
+
+            .badge_icon {
+              font-size: 14px;
+            }
+          }
+
+          // 库存徽章
+          .stock_badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            color: #fff;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+
+            .stock_icon {
+              font-size: 14px;
+            }
+
+            .stock_text {
+              font-weight: 500;
+            }
           }
         }
+
         // 内容盒子
         .data_content {
-          // 价格
-          .data_price {
-            color: #f00;
-          }
-          // 标题1
+          padding: 12px;
+
+          // 标题
           .data_title1 {
             margin: 0 0 10px;
             width: 100%;
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+            line-height: 1.4;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            min-height: 40px;
           }
-          // 标题2
-          .data_title2 {
-            margin: 0 0 10px;
-            width: 100%;
+
+          // 价格对比
+          .price_comparison {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+
+            // 原价
+            .original_price {
+              display: flex;
+              flex-direction: column;
+              gap: 2px;
+
+              .label {
+                font-size: 11px;
+                color: #999;
+              }
+
+              .price {
+                font-size: 13px;
+                color: #999;
+                text-decoration: line-through;
+              }
+            }
+
+            // 团购价
+            .group_price {
+              display: flex;
+              flex-direction: column;
+              align-items: flex-end;
+              gap: 2px;
+
+              .label {
+                font-size: 11px;
+                color: #ff4757;
+                font-weight: 500;
+              }
+
+              .price_wrapper {
+                color: #ff4757;
+                display: flex;
+                align-items: baseline;
+
+                .price_symbol {
+                  font-size: 14px;
+                  font-weight: 600;
+                }
+
+                .price_value {
+                  font-size: 22px;
+                  font-weight: 700;
+                  margin-left: 2px;
+                }
+              }
+            }
           }
-          // 标题3
-          .data_title3 {
-            margin: 0 0 10px;
-            width: 100%;
-          }
-          // 标题4
-          .data_title4 {
-            margin: 0 0 10px;
-            width: 100%;
-          }
-          // 标题5
-          .data_title5 {
-            margin: 0 0 10px;
-            width: 100%;
-          }
-        }
-      }
-      .data_item:nth-of-type(2n) {
-        // 图片盒子
-        .data_img_box {
-          width: 100%;
-          // 图片
-          .data_img {
-            object-fit: cover;
-            width: 100%;
-            height: 100%;
-          }
-        }
-        // 内容盒子
-        .data_content {
-          // 价格
-          .data_price {
-            color: #f00;
-          }
-          // 标题1
-          .data_title1 {
-            margin: 0 0 10px;
-            width: 100%;
-          }
-          // 标题2
-          .data_title2 {
-            margin: 0 0 10px;
-            width: 100%;
-          }
-          // 标题3
-          .data_title3 {
-            margin: 0 0 10px;
-            width: 100%;
-          }
-          // 标题4
-          .data_title4 {
-            margin: 0 0 10px;
-            width: 100%;
-          }
-          // 标题5
-          .data_title5 {
-            margin: 0 0 10px;
-            width: 100%;
-          }
-        }
-      }
-      .data_item:nth-of-type(2n - 1):hover {
-        // 图片盒子
-        .data_img_box {
-          // 图片
-          .data_img {
-          }
-        }
-        // 内容盒子
-        .data_content {
-          // 价格
-          .data_price {
-          }
-          // 标题1
-          .data_title1 {
-          }
-          // 标题2
-          .data_title2 {
-          }
-          // 标题3
-          .data_title3 {
-          }
-          // 标题4
-          .data_title4 {
-          }
-          // 标题5
-          .data_title5 {
-          }
-        }
-      }
-      .data_item:nth-of-type(2n):hover {
-        // 图片盒子
-        .data_img_box {
-          // 图片
-          .data_img {
-          }
-        }
-        // 内容盒子
-        .data_content {
-          // 价格
-          .data_price {
-          }
-          // 标题1
-          .data_title1 {
-          }
-          // 标题2
-          .data_title2 {
-          }
-          // 标题3
-          .data_title3 {
-          }
-          // 标题4
-          .data_title4 {
-          }
-          // 标题5
-          .data_title5 {
+
+          // 节省金额
+          .save_amount {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            background: linear-gradient(90deg, #fff5f5 0%, #ffe0e0 100%);
+            padding: 4px 8px;
+            border-radius: 6px;
+
+            .save_text {
+              font-size: 12px;
+              color: #666;
+            }
+
+            .save_value {
+              font-size: 14px;
+              color: #ff4757;
+              font-weight: 600;
+            }
           }
         }
       }
@@ -626,3 +689,4 @@ init()
   }
 }
 </style>
+
