@@ -6,6 +6,7 @@ import com.cl.entity.OrdersEntity;
 import com.cl.entity.ShangpinxinxiEntity;
 import com.cl.entity.TuangoushangpinEntity;
 import com.cl.entity.view.OrdersView;
+import com.cl.config.RabbitMQConfig;
 import com.cl.service.InventoryService;
 import com.cl.service.OrdersService;
 import com.cl.service.ShangpinxinxiService;
@@ -13,10 +14,12 @@ import com.cl.service.TuangoushangpinService;
 import com.cl.utils.MPUtil;
 import com.cl.utils.PageUtils;
 import com.cl.utils.R;
+import com.alibaba.fastjson.JSON;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,6 +42,7 @@ public class OrdersController {
   @Autowired private InventoryService inventoryService;
   @Autowired private ShangpinxinxiService shangpinxinxiService;
   @Autowired private TuangoushangpinService tuangoushangpinService;
+  @Autowired private RabbitTemplate rabbitTemplate;
 
   /** 后台列表 */
   @RequestMapping("/page")
@@ -126,8 +130,8 @@ public class OrdersController {
     orders.setUserid((Long) request.getSession().getAttribute("userId"));
     ordersService.insert(orders);
 
-    // 3. 同步更新 MySQL 库存
-    syncInventoryToDb(orders);
+    // 3. 发送 MQ 消息异步更新 MySQL 库存
+    sendInventoryUpdateMessage(orders, "deduct");
 
     return R.ok();
   }
@@ -147,26 +151,19 @@ public class OrdersController {
     // 2. 扣减成功，保存订单
     ordersService.insert(orders);
 
-    // 3. 同步更新 MySQL 库存
-    syncInventoryToDb(orders);
+    // 3. 发送 MQ 消息异步更新 MySQL 库存
+    sendInventoryUpdateMessage(orders, "deduct");
 
     return R.ok();
   }
 
-  private void syncInventoryToDb(OrdersEntity orders) {
-      if ("shangpinxinxi".equals(orders.getTablename())) {
-          ShangpinxinxiEntity product = shangpinxinxiService.selectById(orders.getGoodid());
-          if (product != null && product.getAlllimittimes() != null) {
-              product.setAlllimittimes(product.getAlllimittimes() - orders.getBuynumber());
-              shangpinxinxiService.updateById(product);
-          }
-      } else if ("tuangoushangpin".equals(orders.getTablename())) {
-          TuangoushangpinEntity product = tuangoushangpinService.selectById(orders.getGoodid());
-          if (product != null && product.getAlllimittimes() != null) {
-              product.setAlllimittimes(product.getAlllimittimes() - orders.getBuynumber());
-              tuangoushangpinService.updateById(product);
-          }
-      }
+  private void sendInventoryUpdateMessage(OrdersEntity orders, String action) {
+      Map<String, Object> map = new HashMap<>();
+      map.put("tablename", orders.getTablename());
+      map.put("goodid", orders.getGoodid());
+      map.put("buynumber", orders.getBuynumber());
+      map.put("action", action);
+      rabbitTemplate.convertAndSend(RabbitMQConfig.INVENTORY_EXCHANGE, RabbitMQConfig.INVENTORY_ROUTING_KEY, JSON.toJSONString(map));
   }
 
   /** 修改 */
@@ -178,20 +175,8 @@ public class OrdersController {
     // 如果订单状态变为已退款，恢复库存
     if (oldOrder != null && "已退款".equals(orders.getStatus()) && !"已退款".equals(oldOrder.getStatus())) {
         inventoryService.addStock(orders.getTablename(), orders.getGoodid(), orders.getBuynumber());
-        // 同步更新 MySQL
-        if ("shangpinxinxi".equals(orders.getTablename())) {
-            ShangpinxinxiEntity product = shangpinxinxiService.selectById(orders.getGoodid());
-            if (product != null) {
-                product.setAlllimittimes(product.getAlllimittimes() + orders.getBuynumber());
-                shangpinxinxiService.updateById(product);
-            }
-        } else if ("tuangoushangpin".equals(orders.getTablename())) {
-            TuangoushangpinEntity product = tuangoushangpinService.selectById(orders.getGoodid());
-            if (product != null) {
-                product.setAlllimittimes(product.getAlllimittimes() + orders.getBuynumber());
-                tuangoushangpinService.updateById(product);
-            }
-        }
+        // 发送 MQ 消息异步更新 MySQL
+        sendInventoryUpdateMessage(orders, "add");
     }
 
     ordersService.updateById(orders); // 全部更新
