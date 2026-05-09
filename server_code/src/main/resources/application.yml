@@ -13,6 +13,11 @@ spring:
         url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2B8&useSSL=false
         username: root
         password: 123456
+    redis:
+      database: 13
+      host: 127.0.0.1
+      #password: 123456
+      port: 6379
 
 #        driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
 #        url: jdbc:sqlserver://127.0.0.1:1433;DatabaseName=cl636300194
@@ -50,4 +55,4 @@ mybatis-plus:
     cache-enabled: false
     call-setters-on-nulls: true
     #springboot 项目mybatis plus 设置 jdbcTypeForNull (oracle数据库需配置JdbcType.NULL, 默认是Other)
-    jdbc-type-for-null: 'null' 
+    jdbc-type-for-null: 'null'

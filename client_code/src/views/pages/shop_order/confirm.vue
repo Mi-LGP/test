@@ -324,11 +324,6 @@ const payClick = async () => {
     context.$http.post(`${context.$toolUtil.storageGet('frontSessionTable')}/update`, user.value)
 
     orders.forEach(order => {
-      //如果商品有库存 减去商品库存
-      if (order.goods.hasOwnProperty('alllimittimes')) {
-        order.goods.alllimittimes = order.goods.alllimittimes - order.buynumber
-      }
-      context.$http.post(`${order.tablename}/update`, order.goods)
       // 如果是普通订单或团购但已支付，直接保存；否则更新订单状态
       if (payType.value !== 3 || order.status === '已支付') {
         // 普通订单或已成团的团购单，已经是"已支付"状态，无需再更新

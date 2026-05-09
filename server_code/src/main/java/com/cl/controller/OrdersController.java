@@ -3,8 +3,13 @@ package com.cl.controller;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.cl.annotation.IgnoreAuth;
 import com.cl.entity.OrdersEntity;
+import com.cl.entity.ShangpinxinxiEntity;
+import com.cl.entity.TuangoushangpinEntity;
 import com.cl.entity.view.OrdersView;
+import com.cl.service.InventoryService;
 import com.cl.service.OrdersService;
+import com.cl.service.ShangpinxinxiService;
+import com.cl.service.TuangoushangpinService;
 import com.cl.utils.MPUtil;
 import com.cl.utils.PageUtils;
 import com.cl.utils.R;
@@ -31,6 +36,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/orders")
 public class OrdersController {
   @Autowired private OrdersService ordersService;
+  @Autowired private InventoryService inventoryService;
+  @Autowired private ShangpinxinxiService shangpinxinxiService;
+  @Autowired private TuangoushangpinService tuangoushangpinService;
 
   /** 后台列表 */
   @RequestMapping("/page")
@@ -104,19 +112,61 @@ public class OrdersController {
 
   /** 后端保存 */
   @RequestMapping("/save")
+  @Transactional
   public R save(@RequestBody OrdersEntity orders, HttpServletRequest request) {
-    // ValidatorUtils.validateEntity(orders);
+    // 1. Redis Lua 扣减库存
+    Long result = inventoryService.deductStock(orders.getTablename(), orders.getGoodid(), orders.getBuynumber());
+    if (result == 0) {
+        return R.error("库存不足");
+    } else if (result == -1) {
+        return R.error("商品库存信息异常");
+    }
+
+    // 2. 扣减成功，保存订单
     orders.setUserid((Long) request.getSession().getAttribute("userId"));
     ordersService.insert(orders);
+
+    // 3. 同步更新 MySQL 库存
+    syncInventoryToDb(orders);
+
     return R.ok();
   }
 
   /** 前端保存 */
   @RequestMapping("/add")
+  @Transactional
   public R add(@RequestBody OrdersEntity orders, HttpServletRequest request) {
-    // ValidatorUtils.validateEntity(orders);
+    // 1. Redis Lua 扣减库存
+    Long result = inventoryService.deductStock(orders.getTablename(), orders.getGoodid(), orders.getBuynumber());
+    if (result == 0) {
+        return R.error("库存不足");
+    } else if (result == -1) {
+        return R.error("商品库存信息异常");
+    }
+
+    // 2. 扣减成功，保存订单
     ordersService.insert(orders);
+
+    // 3. 同步更新 MySQL 库存
+    syncInventoryToDb(orders);
+
     return R.ok();
+  }
+
+  private void syncInventoryToDb(OrdersEntity orders) {
+      if ("shangpinxinxi".equals(orders.getTablename())) {
+          ShangpinxinxiEntity product = shangpinxinxiService.selectById(orders.getGoodid());
+          if (product != null && product.getAlllimittimes() != null) {
+              product.setAlllimittimes(product.getAlllimittimes() - orders.getBuynumber());
+              shangpinxinxiService.updateById(product);
+          }
+      } else if ("tuangoushangpin".equals(orders.getTablename())) {
+          TuangoushangpinEntity product = tuangoushangpinService.selectById(orders.getGoodid());
+          if (product != null && product.getAlllimittimes() != null) {
+              product.setAlllimittimes(product.getAlllimittimes() - orders.getBuynumber());
+              tuangoushangpinService.updateById(product);
+          }
+      }
   }
 
   /** 修改 */
@@ -124,6 +174,26 @@ public class OrdersController {
   @Transactional
   public R update(@RequestBody OrdersEntity orders, HttpServletRequest request) {
     // ValidatorUtils.validateEntity(orders);
+    OrdersEntity oldOrder = ordersService.selectById(orders.getId());
+    // 如果订单状态变为已退款，恢复库存
+    if (oldOrder != null && "已退款".equals(orders.getStatus()) && !"已退款".equals(oldOrder.getStatus())) {
+        inventoryService.addStock(orders.getTablename(), orders.getGoodid(), orders.getBuynumber());
+        // 同步更新 MySQL
+        if ("shangpinxinxi".equals(orders.getTablename())) {
+            ShangpinxinxiEntity product = shangpinxinxiService.selectById(orders.getGoodid());
+            if (product != null) {
+                product.setAlllimittimes(product.getAlllimittimes() + orders.getBuynumber());
+                shangpinxinxiService.updateById(product);
+            }
+        } else if ("tuangoushangpin".equals(orders.getTablename())) {
+            TuangoushangpinEntity product = tuangoushangpinService.selectById(orders.getGoodid());
+            if (product != null) {
+                product.setAlllimittimes(product.getAlllimittimes() + orders.getBuynumber());
+                tuangoushangpinService.updateById(product);
+            }
+        }
+    }
+
     ordersService.updateById(orders); // 全部更新
     if (StringUtils.isNotBlank(orders.getGroupno()) && "拼团中".equals(orders.getStatus())) {
       List<OrdersEntity> list =

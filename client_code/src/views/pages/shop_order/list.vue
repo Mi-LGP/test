@@ -414,49 +414,38 @@ const cancelClick = row => {
     .catch(_ => {})
 }
 //返回商品对象，如果商品存在库存,则返还库存
-const returnLimit = async order => {
-  let res = await context.$http.get(`${order.tablename}/info/${order.goodid}`)
-  let data = res.data.data
-  if (data.alllimittimes) {
-    //如果商品存在库存，则加回去
-    data.alllimittimes = parseInt(data.alllimittimes) + parseInt(order.buynumber)
-    context.$http.post(`${order.tablename}/update`, data)
-  }
-  return data
-}
 // 退款
 const refundPriceClick = row => {
   ElMessageBox.confirm(`是否对该订单进行退款操作？`, '提示', {
     confirmButtonText: '是',
     cancelButtonText: '否',
     type: 'warning',
-  })
-    .then(async () => {
-      let data = await returnLimit(row)
-      row.status = '已退款'
-      if (row.type == 2) {
-        // 如果是积分兑换，则把减去的积分加回去
-        userinfo.value.jf = parseInt(userinfo.value.jf) + parseInt(row.total)
-      } else {
-        // 如果是购物或者团购模式，且商品存在积分，则把加上的积分减去
-        if (data.jf) {
-          userinfo.value.jf = parseInt(userinfo.value.jf) - parseInt(row.total)
-        }
-        // 把减去的余额加回去
-        userinfo.value.money = (parseFloat(userinfo.value.money) + parseFloat(row.total)).toFixed(2)
+  }).then(async () => {
+    row.status = '已退款'
+    if (row.type == 2) {
+      // 如果是积分兑换，则把减去的积分加回去
+      userinfo.value.jf = parseInt(userinfo.value.jf) + parseInt(row.total)
+    } else {
+      // 如果是购物或者团购模式，且商品存在积分，则把加上的积分减去
+      let res = await context.$http.get(`${row.tablename}/info/${row.goodid}`)
+      let data = res.data.data
+      if (data.jf) {
+        userinfo.value.jf = parseInt(userinfo.value.jf) - parseInt(row.total)
       }
-      // 修改订单状态
-      context.$http.post('orders/update', row)
-      // 更新用户信息
-      context.$http
-        .post(`${context.$toolUtil.storageGet('frontSessionTable')}/update`, userinfo.value)
-        .then(res => {
-          context.$message.success('退款成功')
-          getSession()
-          statusChange()
-        })
-    })
-    .catch(_ => {})
+      // 把减去的余额加回去
+      userinfo.value.money = (parseFloat(userinfo.value.money) + parseFloat(row.total)).toFixed(2)
+    }
+    // 修改订单状态
+    context.$http.post('orders/update', row)
+    // 更新用户信息
+    context.$http
+      .post(`${context.$toolUtil.storageGet('frontSessionTable')}/update`, userinfo.value)
+      .then(res => {
+        context.$message.success('退款成功')
+        getSession()
+        statusChange()
+      })
+  })
 }
 // 退货
 const refundGoodClick = row => {
@@ -487,6 +476,36 @@ const cancelGroupClick = row => {
     type: 'warning',
   })
     .then(() => {
+      // 更新拼团活动表的人数
+      if (row.tuangouid) {
+        context
+          ?.$http({
+            url: 'tuangouactivity/info/' + row.tuangouid,
+            method: 'get',
+          })
+          .then(tuangouRes => {
+            let tuangouData = tuangouRes.data.data
+            // 减少拼团活动的当前人数
+            tuangouData.curpeople = Number(tuangouData.curpeople) - 1
+            // 如果人数小于 0，设置为 0
+            if (tuangouData.curpeople < 0) {
+              tuangouData.curpeople = 0
+            }
+            // 如果人数减少后为 0，将拼团状态改为"已结束"
+            if (tuangouData.curpeople === 0 && tuangouData.status === '拼团中') {
+              tuangouData.status = '已结束'
+            }
+            // 更新拼团活动
+            context
+              ?.$http({
+                url: 'tuangouactivity/update',
+                method: 'post',
+                data: tuangouData,
+              })
+              .then(updateRes => {})
+          })
+      }
+      // 如果商品存在积分，则把加上的积分减去
       context
         ?.$http({
           url: `${row.tablename}/info/${row.goodid}`,
@@ -494,48 +513,6 @@ const cancelGroupClick = row => {
         })
         .then(res => {
           let data = res.data.data
-          // 如果商品存在库存，则加回去
-          if (data.alllimittimes) {
-            data.alllimittimes = parseInt(data.alllimittimes) + parseInt(row.buynumber)
-            // 更新商品库存
-            context
-              ?.$http({
-                url: `${row.tablename}/update`,
-                method: 'post',
-                data: data,
-              })
-              .then(obj1 => {})
-          }
-          // 更新拼团活动表的人数
-          if (row.tuangouid) {
-            context
-              ?.$http({
-                url: 'tuangouactivity/info/' + row.tuangouid,
-                method: 'get',
-              })
-              .then(tuangouRes => {
-                let tuangouData = tuangouRes.data.data
-                // 减少拼团活动的当前人数
-                tuangouData.curpeople = Number(tuangouData.curpeople) - 1
-                // 如果人数小于 0，设置为 0
-                if (tuangouData.curpeople < 0) {
-                  tuangouData.curpeople = 0
-                }
-                // 如果人数减少后为 0，将拼团状态改为"已结束"
-                if (tuangouData.curpeople === 0 && tuangouData.status === '拼团中') {
-                  tuangouData.status = '已结束'
-                }
-                // 更新拼团活动
-                context
-                  ?.$http({
-                    url: 'tuangouactivity/update',
-                    method: 'post',
-                    data: tuangouData,
-                  })
-                  .then(updateRes => {})
-              })
-          }
-          // 如果商品存在积分，则把加上的积分减去
           if (data.jf) {
             userinfo.value.jf = parseInt(userinfo.value.jf) - parseInt(row.total)
           }
