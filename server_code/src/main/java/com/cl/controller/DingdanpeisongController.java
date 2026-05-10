@@ -43,6 +43,9 @@ public class DingdanpeisongController {
     if (tableName.equals("shangjia")) {
       dingdanpeisong.setShangjia((String) request.getSession().getAttribute("username"));
     }
+    if (tableName.equals("peisongyuan")) {
+      dingdanpeisong.setPeisongyuan((String) request.getSession().getAttribute("username"));
+    }
     EntityWrapper<DingdanpeisongEntity> ew = new EntityWrapper<DingdanpeisongEntity>();
 
     PageUtils page =

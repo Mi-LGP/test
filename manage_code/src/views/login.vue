@@ -134,6 +134,32 @@ const getMenu = () => {
           userList.value.push(menus.value[i])
         }
       }
+      // 确认派送员是否在列表中，如果不在则手动添加（防止数据库未同步）
+      if (userList.value.findIndex(item => item.roleName == '派送员') == -1) {
+        let deliveryRole = {
+          roleName: '派送员',
+          tableName: 'peisongyuan',
+          hasBackLogin: '是',
+          backMenu: [
+            {
+              child: [
+                {
+                  allButtons: ['查看', '修改', '删除'],
+                  appFrontIcon: 'cuIcon-deliver',
+                  buttons: ['查看', '修改', '删除'],
+                  menu: '订单配送',
+                  tableName: 'dingdanpeisong',
+                },
+              ],
+              fontClass: 'icon-order',
+              menu: '订单配送管理',
+              unicode: '&#xef9a;',
+            },
+          ],
+        }
+        userList.value.push(deliveryRole)
+        menus.value.push(deliveryRole)
+      }
       loginForm.value.role = userList.value[0].roleName
       context?.$toolUtil.storageSet('menus', JSON.stringify(menus.value))
     })

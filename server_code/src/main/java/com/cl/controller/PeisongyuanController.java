@@ -5,6 +5,7 @@ import com.cl.annotation.IgnoreAuth;
 import com.cl.entity.PeisongyuanEntity;
 import com.cl.entity.view.PeisongyuanView;
 import com.cl.service.PeisongyuanService;
+import com.cl.service.TokenService;
 import com.cl.utils.MPUtil;
 import com.cl.utils.PageUtils;
 import com.cl.utils.R;
@@ -29,6 +30,71 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/peisongyuan")
 public class PeisongyuanController {
   @Autowired private PeisongyuanService peisongyuanService;
+
+  @Autowired private TokenService tokenService;
+
+  /** 登录 */
+  @IgnoreAuth
+  @RequestMapping(value = "/login")
+  public R login(String username, String password, String captcha, HttpServletRequest request) {
+    PeisongyuanEntity u =
+        peisongyuanService.selectOne(
+            new EntityWrapper<PeisongyuanEntity>().eq("peisongyuan", username));
+    if (u == null || !u.getMima().equals(password)) {
+      return R.error("账号或密码不正确");
+    }
+    String token = tokenService.generateToken(u.getId(), username, "peisongyuan", "配送员");
+    return R.ok().put("token", token);
+  }
+
+  /** 注册 */
+  @IgnoreAuth
+  @RequestMapping("/register")
+  public R register(@RequestBody PeisongyuanEntity peisongyuan) {
+    // ValidatorUtils.validateEntity(peisongyuan);
+    PeisongyuanEntity u =
+        peisongyuanService.selectOne(
+            new EntityWrapper<PeisongyuanEntity>().eq("peisongyuan", peisongyuan.getPeisongyuan()));
+    if (u != null) {
+      return R.error("注册用户已存在");
+    }
+    Long uId = new Date().getTime();
+    peisongyuan.setId(uId);
+    peisongyuanService.insert(peisongyuan);
+    return R.ok();
+  }
+
+  /** 退出 */
+  @RequestMapping("/logout")
+  public R logout(HttpServletRequest request) {
+    request.getSession().invalidate();
+    return R.ok("退出成功");
+  }
+
+  /** 获取用户的session用户信息 */
+  @RequestMapping("/session")
+  public R getCurrUser(HttpServletRequest request) {
+    Long id = (Long) request.getSession().getAttribute("userId");
+    return R.ok()
+        .put(
+            "data",
+            peisongyuanService.selectView(new EntityWrapper<PeisongyuanEntity>().eq("id", id)));
+  }
+
+  /** 密码重置 */
+  @IgnoreAuth
+  @RequestMapping(value = "/resetPass")
+  public R resetPass(String username, HttpServletRequest request) {
+    PeisongyuanEntity u =
+        peisongyuanService.selectOne(
+            new EntityWrapper<PeisongyuanEntity>().eq("peisongyuan", username));
+    if (u == null) {
+      return R.error("账号不存在");
+    }
+    u.setMima("123456");
+    peisongyuanService.updateById(u);
+    return R.ok("密码已重置为：123456");
+  }
 
   /** 后台列表 */
   @RequestMapping("/page")

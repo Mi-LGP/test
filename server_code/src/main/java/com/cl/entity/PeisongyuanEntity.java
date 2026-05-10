@@ -39,6 +39,9 @@ public class PeisongyuanEntity<T> implements Serializable {
   /** 配送员 */
   private String peisongyuan;
 
+  /** 密码 */
+  private String mima;
+
   /** 姓名 */
   private String xingming;
 
@@ -73,6 +76,16 @@ public class PeisongyuanEntity<T> implements Serializable {
   /** 获取：配送员 */
   public String getPeisongyuan() {
     return peisongyuan;
+  }
+
+  /** 设置：密码 */
+  public void setMima(String mima) {
+    this.mima = mima;
+  }
+
+  /** 获取：密码 */
+  public String getMima() {
+    return mima;
   }
 
   /** 设置：姓名 */

@@ -6,6 +6,7 @@
 	<!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="com.cl.entity.PeisongyuanEntity" id="peisongyuanMap">
         <result property="peisongyuan" column="peisongyuan"/>
+        <result property="mima" column="mima"/>
         <result property="xingming" column="xingming"/>
         <result property="lianxifangshi" column="lianxifangshi"/>
     </resultMap>
